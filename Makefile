@@ -4,6 +4,7 @@ build:
 
 .PHONY: test
 test:
+	$(MAKE) build
 	dune runtest
 
 .PHONY: setup
