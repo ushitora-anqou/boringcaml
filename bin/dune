@@ -1,0 +1,4 @@
+(executable
+ (public_name boringcaml)
+ (name main)
+ (libraries boringcaml))
