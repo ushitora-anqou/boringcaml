@@ -1,4 +1,4 @@
-type value = VUnit
-type expr = EUnit
-
-let evaluate = function EUnit -> VUnit
+module Evaluator = Evaluator
+module Expr = Expr
+module Parser = Parser
+module Value = Value

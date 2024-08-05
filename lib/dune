@@ -1,2 +1,8 @@
+(menhir
+ (modules p))
+
+(ocamllex
+ (modules l))
+
 (library
  (name boringcaml))
