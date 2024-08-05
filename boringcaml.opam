@@ -3,7 +3,7 @@ synopsis: "BoringCaml"
 description: "BoringCaml"
 maintainer: ["Ushitora Anqou"]
 authors: ["Ushitora Anqou"]
-license: "LICENSE"
+license: "MIT"
 tags: ["caml"]
 homepage: "https://github.com/ushitora-anqou/boringcaml"
 doc: "https://github.com/ushitora-anqou/boringcaml"
@@ -12,6 +12,8 @@ depends: [
   "ocaml"
   "dune" {>= "3.16"}
   "odoc" {with-doc}
+  "ocamlformat" {= "0.26.2" & with-dev-setup}
+  "ocaml-lsp-server" {wth-dev-setup}
 ]
 build: [
   ["dune" "subst"] {dev}
