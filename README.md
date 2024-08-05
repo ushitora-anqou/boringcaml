@@ -8,7 +8,7 @@ Install opam >= 2.2.0 (for `--with-dev-setup`). Then:
 
 ```
 cd boringcaml
-opam install . --deps-only --with-dev-setup --with-test
+make setup
 make
 make test
 ```
