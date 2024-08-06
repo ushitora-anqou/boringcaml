@@ -12,6 +12,7 @@ depends: [
   "ocaml" {>= "4.13"}
   "dune" {>= "3.16"}
   "menhir"
+  "uutf"
   "odoc" {with-doc}
   "ocamlformat" {= "0.26.2" & with-dev-setup}
   "ocaml-lsp-server" {wth-dev-setup}

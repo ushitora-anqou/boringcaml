@@ -5,4 +5,5 @@
  (modules l))
 
 (library
- (name boringcaml))
+ (name boringcaml)
+ (libraries uutf))

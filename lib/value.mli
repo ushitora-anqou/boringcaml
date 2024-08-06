@@ -1,1 +1,1 @@
-type t = Unit
+type t = Unit | Number of float | String of string

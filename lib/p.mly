@@ -21,6 +21,9 @@ let wloc ((startpos : Lexing.position), (endpos : Lexing.position)) v =
 %}
 
 %token EOF UNIT
+%token <float> NUMBER
+%token <string> ID
+%token <string> STRING
 
 %start toplevel
 %type <Expr.t> toplevel
@@ -31,3 +34,9 @@ toplevel :
 
 Expr :
   | UNIT { wloc $sloc Expr.Unit }
+  | s=STRING {
+    wloc $sloc @@ Expr.String s
+  }
+  | i=NUMBER {
+    wloc $sloc @@ Expr.Number i
+  }
