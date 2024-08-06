@@ -1,6 +1,6 @@
 %{
 let wloc ((startpos : Lexing.position), (endpos : Lexing.position)) v =
-  Expr.
+  Loc.
     {
       v;
       loc =
@@ -20,14 +20,15 @@ let wloc ((startpos : Lexing.position), (endpos : Lexing.position)) v =
     }
 %}
 
-%token EOF UNIT LPAREN RPAREN APP
+%token EOF UNIT LPAREN RPAREN APP FUN RARROW
 %token <float> NUMBER
 %token <string> ID
 %token <string> STRING
 
 /* cf. https://ptival.github.io/2017/05/16/parser-generators-and-function-application/ */
-%nonassoc UNIT NUMBER ID STRING LPAREN /* list ALL other tokens that start an expr */
+%nonassoc UNIT NUMBER ID STRING LPAREN FUN
 %nonassoc APP
+%nonassoc RARROW
 
 %start toplevel
 %type <Expr.t> toplevel
@@ -45,5 +46,9 @@ Expr :
   | i=NUMBER {
     wloc $sloc @@ Expr.Number i
   }
+  | FUN params=list(Pat) RARROW body=Expr { wloc $sloc @@ Expr.Fun (params, body) }
   | LPAREN e=Expr RPAREN { e }
   | l=Expr r=Expr %prec APP { wloc $sloc @@ Expr.Apply (l, r) }
+
+Pat :
+  | id=ID { wloc $sloc @@ Pat.Var id }

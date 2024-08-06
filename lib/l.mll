@@ -1,7 +1,4 @@
 {
-  let keywords = [
-  ]
-
   exception Unexpected_char of char
 
   let string_literal_buffer = Buffer.create 0
@@ -44,6 +41,8 @@ rule main = parse
 }
 | '(' { P.LPAREN }
 | ')' { P.RPAREN }
+| "->" { P.RARROW }
+| "fun" { P.FUN }
 | ('0' | ['1'-'9'] ['0'-'9']*) ('.' ['0'-'9']+)? (['e' 'E'] ['-' '+']? ['0'-'9']+)? {
   P.NUMBER (Lexing.lexeme lexbuf |> float_of_string)
 }
@@ -56,9 +55,7 @@ rule main = parse
 }
 | ['_' 'a'-'z' 'A'-'Z'] ['_' 'a'-'z' 'A'-'Z' '0'-'9']* {
   let id = Lexing.lexeme lexbuf in
-  match List.assoc_opt id keywords with
-  | Some x -> x
-  | None -> P.ID id
+  P.ID id
 }
 | eof {
   P.EOF

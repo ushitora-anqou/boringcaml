@@ -22,7 +22,7 @@ let () =
                |> Result.get_ok |> Evaluator.evaluate
              in
              assert (v = Value.Number 123.45) );
-           ( "function application" >:: fun _ ->
+           ( "parsing function application" >:: fun _ ->
              let v = Parser.parse_string "a b (c d)" |> Result.get_ok in
              match v with
              | {
@@ -34,4 +34,10 @@ let () =
              } ->
                  ()
              | _ -> assert false );
+           ( "function" >:: fun _ ->
+             let v =
+               Parser.parse_string "(fun x -> 1) 0"
+               |> Result.get_ok |> Evaluator.evaluate
+             in
+             assert (v = Value.Number 1.0) );
          ])
