@@ -3,5 +3,11 @@ type range = { startpos : position; endpos : position }
 type location = { fname : string; ran : range option }
 type 'a with_location = { v : 'a; loc : location }
 
-type t' = Unit | String of string | Number of float
+type t' =
+  | Unit
+  | String of string
+  | Number of float
+  | Apply of (t * t)
+  | Var of string
+
 and t = t' with_location

@@ -22,4 +22,16 @@ let () =
                |> Result.get_ok |> Evaluator.evaluate
              in
              assert (v = Value.Number 123.45) );
+           ( "function application" >:: fun _ ->
+             let v = Parser.parse_string "a b (c d)" |> Result.get_ok in
+             match v with
+             | {
+              v =
+                Expr.Apply
+                  ( { v = Apply ({ v = Var "a"; _ }, { v = Var "b"; _ }); _ },
+                    { v = Apply ({ v = Var "c"; _ }, { v = Var "d"; _ }); _ } );
+              _;
+             } ->
+                 ()
+             | _ -> assert false );
          ])
